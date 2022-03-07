@@ -12,7 +12,7 @@ double getTaxiFees() {
     double cost;
 
     do {
-        printf("Enter taxi cost: \n");
+        printf("Enter taxi cost for day: \n");
         scanf(" %lf", &taxiFee);
 
         if (taxiFee < 0) {

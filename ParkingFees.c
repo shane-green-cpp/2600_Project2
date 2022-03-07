@@ -11,7 +11,7 @@ double getParkingFees() {
     double parkingFee = -1;
 
     do {
-        printf("Enter parking fee: \n");
+        printf("Enter parking fee for day: \n");
         scanf(" %lf", &parkingFee);
         if (parkingFee < 0) {
             printf("invalid input, try again\n");
