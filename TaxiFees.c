@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//total allowable expenses
+int allowableTaxiExpenses(int days) {
+    return 10 * days;
+}
+
+//gets inputed taxi fee before deductions
 double getTaxiFees() {
     double taxiFee = -1;
     double cost;
@@ -16,15 +22,10 @@ double getTaxiFees() {
         }
     } while (taxiFee < 0);
 
-    if (taxiFee - 10 < 0) {
-        cost = 0;
-    } else {
-        cost = taxiFee - 10;
-    }
-
-    return cost;
+    return taxiFee;
 }
 
+//total expenses incurred
 double taxiFeesAcrossDays(int days) {
     double cost = 0;
     for (int i = 0; i < days; i++) {
@@ -34,10 +35,35 @@ double taxiFeesAcrossDays(int days) {
     return cost;
 }
 
+//returns amount company saved
+double taxiSavedToCompany(int days, double totalExpenses) {
+    double cost = allowableTaxiExpenses(days) - totalExpenses;
+    
+    //if we spend more than given, company saves nothing 
+    if (cost < 0) {
+        cost = 0;
+    }
+    return cost;
+}
+
+//returns cost to businessman
+double taxiCostToBusinessman(int days, double totalExpenses) {
+    double cost = totalExpenses - allowableTaxiExpenses(days);
+    
+    //if we spend less than given, businessman owes nothing 
+    if (cost < 0) {
+        cost = 0;
+    }
+    return cost;
+}
+
 //unit testing
 int main() {
     double cost;
-    cost = taxiFeesAcrossDays(3);
-    printf("cost of taxi fees to employee: %0.2f\n", cost);
+    int days = 3;
+    cost = taxiFeesAcrossDays(days);
+    printf("total taxi expenses: $%0.2f\n", cost);
+    printf("money saved by company: $%0.2f\n", taxiSavedToCompany(days, cost));
+    printf("money owed by businessman: $%0.2f\n", taxiCostToBusinessman(days, cost));
     return 0;
 }
