@@ -24,10 +24,19 @@ double getParkingFees() {
     return cost;
 }
 
+double parkingFeesAcrossDays(int days) {
+    double cost = 0;
+    for (int i = 0; i < days; i++) {
+        cost += getParkingFees();
+    }
+
+    return cost;
+}
+
 //unit testing
 int main() {
     double cost;
-    cost = getParkingFees();
+    cost = parkingFeesAcrossDays(3);
     printf("cost of parking fees to employee: %0.2f\n", cost);
     return 0;
 }
